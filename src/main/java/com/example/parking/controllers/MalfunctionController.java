@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class MalfunctionController {
@@ -36,12 +37,12 @@ public class MalfunctionController {
     }
 
     @GetMapping(value = "/malf/{id}")
-    public ResponseEntity<Malfunction> read(@PathVariable String id) throws NotFoundException {
+    public ResponseEntity<Malfunction> read(@PathVariable UUID id) throws NotFoundException {
         return ResponseEntity.ok(malfunctionService.readMalfunction(id));
     }
 
     @DeleteMapping(value = "/malf/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) throws NotFoundException {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") UUID id) throws NotFoundException {
         malfunctionService.deleteMalfunction(id);
         return ResponseEntity.noContent().build();
     }

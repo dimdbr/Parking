@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MalfunctionServiceImpl implements MalfunctionService {
@@ -29,7 +30,7 @@ public class MalfunctionServiceImpl implements MalfunctionService {
     }
 
     @Override
-    public Malfunction readMalfunction(String id) throws NotFoundException {
+    public Malfunction readMalfunction(UUID id) throws NotFoundException {
         Optional<Malfunction> tempMalfunction =malfunctionRepository.findById(id);
         if(tempMalfunction.isPresent())
             return malfunctionRepository.findById(id).get();
@@ -38,7 +39,12 @@ public class MalfunctionServiceImpl implements MalfunctionService {
     }
 
     @Override
-    public void deleteMalfunction(String id) throws NotFoundException {
+    public Malfunction addMalfunctionToWorker(String workerId, Malfunction malfunction) throws NotFoundException {
+        return malfunctionRepository.save(malfunction.addToWorker(workerId));
+    }
+
+    @Override
+    public void deleteMalfunction(UUID id) throws NotFoundException {
         malfunctionRepository.delete(readMalfunction(id));
 
     }

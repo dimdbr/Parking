@@ -24,8 +24,7 @@ public final  class CommunalWorker {
     private CW_Type cwType;
     @Column(name = "iswinter")
     private boolean isWinter;
-    @Column(name = "malfunctionid")
-    private String malfunctionId;
+
 
     public CommunalWorker(String cwId, String name, double salary, CW_Type cwType, boolean isWinter, String malfunctionId) {
         this.cwId = cwId;
@@ -33,7 +32,7 @@ public final  class CommunalWorker {
         this.salary = salary;
         this.cwType = cwType;
         this.isWinter = isWinter;
-        this.malfunctionId = malfunctionId;
+
     }
 
     public CommunalWorker(String name, double salary, CW_Type cwType, boolean isWinter) {
@@ -44,8 +43,6 @@ public final  class CommunalWorker {
         this.isWinter = isWinter;
 
     }
-
-
 
     public CommunalWorker() {
 
@@ -91,11 +88,6 @@ public final  class CommunalWorker {
         isWinter = winter;
     }
 
-    public String getMalfunctionId() {
-        return malfunctionId;
-    }
 
-    public void setMalfunctionId(String malfunctionId) {
-        this.malfunctionId = malfunctionId;
-    }
+
 }

@@ -17,6 +17,7 @@ public class ClientController {
     private final ClientService clientService;
     @Autowired
     public ClientController(ClientService clientService) {
+
         this.clientService = clientService;
     }
 
@@ -35,11 +36,6 @@ public class ClientController {
     @GetMapping(value = "/clients/{id}")
     public ResponseEntity<Client> read(@PathVariable String id) throws NotFoundException {
         return ResponseEntity.ok(clientService.readClient(id));
-    }
-
-    @PutMapping(value = "/clients/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody double payPrice) throws NotFoundException{
-        return ResponseEntity.ok(clientService.updateClientPayPrice(id,payPrice));
     }
 
     @DeleteMapping(value = "/clients/{id}")

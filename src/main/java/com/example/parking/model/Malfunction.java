@@ -2,10 +2,8 @@ package com.example.parking.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "malfunctions")
@@ -13,25 +11,42 @@ public final class Malfunction {
 
     @Id
     @Column(name = "id",updatable = false, nullable = false)
+    @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String malfunctionId;
-    @Column(name = "fixPrice")
+    //"org.hibernate.id.UUIDGenerator"
+    private UUID malfunctionId;
+    @Column(name = "fixprice")
     private double fixPrice;
-    @Column(name = "malfunctionDesc")
+    @Column(name = "malfname")
     private String malfunctionDesc;
+    @Column(name = "ispayed")
+    private boolean isPayed;
+    @Column(name = "workerid")
+    private String workerId;
 
 
-    public Malfunction(String malfunctionId, double fixPrice, String malfunctionDesc) {
+
+    public Malfunction(UUID malfunctionId, double fixPrice, String malfunctionDesc, boolean isPayed, String workerId) {
         this.malfunctionId = malfunctionId;
         this.fixPrice = fixPrice;
         this.malfunctionDesc = malfunctionDesc;
+        this.isPayed = isPayed;
+        this.workerId = workerId;
+    }
+    public Malfunction( double fixPrice, String malfunctionDesc) {
+        this.malfunctionId = UUID.randomUUID();
+        this.fixPrice = fixPrice;
+        this.malfunctionDesc = malfunctionDesc;
+        this.isPayed = false;
+
+
     }
 
     public Malfunction() {
 
     }
 
-    public String getMalfunctionId() {
+    public UUID getMalfunctionId() {
         return malfunctionId;
     }
 
@@ -43,7 +58,7 @@ public final class Malfunction {
         return malfunctionDesc;
     }
 
-    public void setMalfunctionId(String malfunctionId) {
+    public void setMalfunctionId(UUID malfunctionId) {
         this.malfunctionId = malfunctionId;
     }
 
@@ -53,6 +68,12 @@ public final class Malfunction {
 
     public void setMalfunctionDesc(String malfunctionDesc) {
         this.malfunctionDesc = malfunctionDesc;
+    }
+
+    public Malfunction addToWorker(String workerId)
+    {
+        this.workerId=workerId;
+        return this;
     }
 
 

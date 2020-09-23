@@ -1,10 +1,10 @@
 package com.example.parking.controllers;
 
 import com.example.parking.model.CommunalWorker;
-import com.example.parking.model.ParkingPlace;
+import com.example.parking.model.Malfunction;
 import com.example.parking.service.CommunalWorkerService;
+import com.example.parking.service.MalfunctionService;
 import javassist.NotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +13,11 @@ import java.util.List;
 @RestController
 public class CommunalWorkerController {
     private final CommunalWorkerService communalWorkerService;
+    private final MalfunctionService malfunctionService;
 
-    public CommunalWorkerController(CommunalWorkerService communalWorkerService) {
+    public CommunalWorkerController(CommunalWorkerService communalWorkerService, MalfunctionService malfunctionService) {
         this.communalWorkerService = communalWorkerService;
+        this.malfunctionService = malfunctionService;
     }
 
     @PostMapping(value = "/workers")
@@ -39,6 +41,14 @@ public class CommunalWorkerController {
     public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody CommunalWorker communalWorker) throws NotFoundException {
         return ResponseEntity.ok(communalWorkerService.updateCommunalWorker(communalWorker,id));
     }
+
+    @PutMapping(value = "/workers/{id}/malf")
+    public ResponseEntity<?> addMalfunction(@PathVariable(name = "id") String id,@RequestBody Malfunction malfunction) throws NotFoundException
+    {
+       return ResponseEntity.ok(communalWorkerService.addMalfunction(id,malfunction));
+    }
+
+
     @DeleteMapping(value = "/workers/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") String id) throws NotFoundException {
         communalWorkerService.deleteCommunalWorker(id);

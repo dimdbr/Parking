@@ -16,6 +16,9 @@ public interface ParkingPlaceService {
 
     ParkingPlace updateParkingPlaceStatus(int id) throws NotFoundException;
 
+    ParkingPlace addParkingPlaceToContract(String contractId, int id) throws NotFoundException;
+
+    ParkingPlace removeParkingPlaceFromContract(String contractId, int id) throws NotFoundException;
 
 
 }

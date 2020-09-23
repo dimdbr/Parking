@@ -14,11 +14,13 @@ public  final class ParkingPlace {
     private int parkingPlaceId;
     @Column(name = "isoccupied")
     private boolean isOccupied =false;
-
+    @Column (name = "contractid")
+    private String contractId;
     public ParkingPlace(@JsonProperty("id") int parkingPlaceId,
                         @JsonProperty("isOccupied") boolean isOccupied) {
         this.parkingPlaceId = parkingPlaceId;
         this.isOccupied = isOccupied;
+        this.contractId=null;
     }
 
     public ParkingPlace()
@@ -41,9 +43,34 @@ public  final class ParkingPlace {
         this.parkingPlaceId = parkingPlaceId;
     }
 
+    public String getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
+    }
+
     public ParkingPlace changeStatus()
     {
         this.isOccupied = !this.isOccupied();
         return this;
     }
+    public ParkingPlace addToContract(String contractId)
+    {
+        this.contractId=contractId;
+        this.changeStatus();
+        return this;
+    }
+
+    public ParkingPlace removeFromContract(String id)
+    {
+        if(this.contractId==id) {
+            this.contractId = null;
+            this.changeStatus();
+            return this;
+        }
+        return this;
+    }
+
 }

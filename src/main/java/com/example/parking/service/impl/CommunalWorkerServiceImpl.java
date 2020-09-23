@@ -1,8 +1,10 @@
 package com.example.parking.service.impl;
 
 import com.example.parking.model.CommunalWorker;
+import com.example.parking.model.Malfunction;
 import com.example.parking.model.ParkingPlace;
 import com.example.parking.repository.CommunalWorkerRepository;
+import com.example.parking.repository.MalfunctionRepository;
 import com.example.parking.service.CommunalWorkerService;
 import com.fasterxml.jackson.annotation.JsonValue;
 import javassist.NotFoundException;
@@ -19,6 +21,8 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
 
     @Autowired
     private CommunalWorkerRepository communalWorkerRepository;
+    @Autowired
+    private MalfunctionRepository malfunctionRepository;
     //private static final Map<Integer, CommunalWorker> COM_WORKER_PLACE_MAP = new HashMap<>();
 
     // Переменная для генерации ID клиента
@@ -48,8 +52,16 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
         if(communalWorkerRepository.existsById(id))
 
             communalWorker.setCwId(id);
-             return communalWorkerRepository.save(communalWorker);
+        return communalWorkerRepository.save(communalWorker);
 
+    }
+
+    @Override
+    public CommunalWorker addMalfunction(String id, Malfunction malfunction) throws NotFoundException {
+
+        malfunction.addToWorker(id);
+        malfunctionRepository.save(malfunction);
+        return communalWorkerRepository.save(readCommunalWorker(id));
     }
 
     @Override

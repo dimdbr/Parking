@@ -1,6 +1,7 @@
 package com.example.parking.service;
 
 import com.example.parking.model.CommunalWorker;
+import com.example.parking.model.Malfunction;
 import javassist.NotFoundException;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface CommunalWorkerService {
 
     CommunalWorker updateCommunalWorker(CommunalWorker communalWorker, String id) throws NotFoundException;
 
+    CommunalWorker addMalfunction(String id, Malfunction malfunction) throws NotFoundException;
     void deleteCommunalWorker(String id) throws NotFoundException;
 
 }
