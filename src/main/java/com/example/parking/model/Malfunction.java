@@ -46,6 +46,10 @@ public final class Malfunction {
 
     }
 
+    public boolean isPayed() {
+        return isPayed;
+    }
+
     public UUID getMalfunctionId() {
         return malfunctionId;
     }
