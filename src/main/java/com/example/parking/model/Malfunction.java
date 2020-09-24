@@ -76,5 +76,10 @@ public final class Malfunction {
         return this;
     }
 
+    public Malfunction changeStatus()
+    {
+        this.isPayed= !this.isPayed;
+        return this;
+    }
 
 }
