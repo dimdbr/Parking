@@ -27,6 +27,14 @@ public class CoOwner {
     public CoOwner()
     {}
 
+    public int getCoOwnerId() {
+        return coOwnerId;
+    }
+
+    public void setCoOwnerId(int coOwnerId) {
+        this.coOwnerId = coOwnerId;
+    }
+
     public String getName() {
         return name;
     }

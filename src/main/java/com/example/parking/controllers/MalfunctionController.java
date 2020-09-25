@@ -29,13 +29,19 @@ public class MalfunctionController {
 
     }
 
-    @GetMapping(value = "/malf")
-    public ResponseEntity<List<Malfunction>> read()
+    @GetMapping(value = "/malf/p")
+    public ResponseEntity<List<Malfunction>> readPayed()
     {
-        return ResponseEntity.ok(malfunctionService.readAllMalfunctions());
+        return ResponseEntity.ok(malfunctionService.readPayedMalfunctions());
 
     }
 
+    @GetMapping(value = "/malf/up")
+    public ResponseEntity<List<Malfunction>> readUnPayed()
+    {
+        return ResponseEntity.ok(malfunctionService.readUnPayedMalfunctions());
+
+    }
     @GetMapping(value = "/malf/{id}")
     public ResponseEntity<Malfunction> read(@PathVariable UUID id) throws NotFoundException {
         return ResponseEntity.ok(malfunctionService.readMalfunction(id));

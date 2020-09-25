@@ -9,7 +9,8 @@ import java.util.UUID;
 public interface MalfunctionService {
 
     Malfunction createMalfunction(Malfunction malfunction);
-    List<Malfunction> readAllMalfunctions();
+    List<Malfunction> readPayedMalfunctions();
+    List<Malfunction> readUnPayedMalfunctions();
     Malfunction readMalfunction(UUID id) throws NotFoundException;
     Malfunction addMalfunctionToWorker(String workerId,Malfunction malfunction) throws NotFoundException;
 

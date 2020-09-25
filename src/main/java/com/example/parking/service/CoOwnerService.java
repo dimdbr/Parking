@@ -9,4 +9,6 @@ public interface CoOwnerService {
     List<CoOwner> readCoOwner();
     CoOwner readCoOwner(int id) throws NotFoundException;
     CoOwner addToBalance(int id, double incomes) throws NotFoundException;
+    CoOwner collectMoney(int id) throws NotFoundException;
+    void payMoney();
 }

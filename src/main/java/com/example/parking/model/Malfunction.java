@@ -74,6 +74,18 @@ public final class Malfunction {
         this.malfunctionDesc = malfunctionDesc;
     }
 
+    public void setPayed(boolean payed) {
+        isPayed = payed;
+    }
+
+    public String getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
+    }
+
     public Malfunction addToWorker(String workerId)
     {
         this.workerId=workerId;

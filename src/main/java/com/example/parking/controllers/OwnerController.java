@@ -31,9 +31,23 @@ public class OwnerController {
     }
 
 
-    @PutMapping(value = "/owners/changecontract/{id}")
+    @PutMapping(value = "/owners/changetariff/{id}")
     public ResponseEntity<?> updateTariff(@PathVariable(name = "id") int tariffid,@RequestBody Tariff tariff) throws NotFoundException
     {
         return ResponseEntity.ok(tariffService.updateTariff(tariffid,tariff));
+    }
+
+    @PutMapping(value = "/owners/{id}/collectmoney")
+    public ResponseEntity<?> collectMoney(@PathVariable(name = "id") int id) throws NotFoundException
+    {
+        return ResponseEntity.ok(coOwnerService.collectMoney(id));
+    }
+
+    @PutMapping(value = "/owners/paymoney")
+    public ResponseEntity<?> payMoney() throws NotFoundException
+    {
+        coOwnerService.payMoney();
+
+        return ResponseEntity.noContent().build();
     }
 }
