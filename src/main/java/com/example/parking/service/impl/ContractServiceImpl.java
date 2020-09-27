@@ -47,6 +47,11 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public Contract readByClientId(String clientId) throws NotFoundException {
+        return contractRepository.findByClientId(clientId);
+    }
+
+    @Override
     public Contract addParkingPlace(String id, int parkingPlace) throws NotFoundException {
         Optional<ParkingPlace> tempPP = parkingPlaceRepository.
                 findById(parkingPlace);
@@ -66,14 +71,11 @@ public class ContractServiceImpl implements ContractService {
     public Contract removeParkingPlace(String id, int parkingPlace) throws NotFoundException {
         Optional<ParkingPlace> tempPP = parkingPlaceRepository.
                 findById(parkingPlace);
-        if(tempPP.isPresent() && (tempPP.get().isOccupied()==true&&(tempPP.get().getContractId()==id))) {
+        if(tempPP.isPresent() && (tempPP.get().isOccupied()==true)&&tempPP.get().getContractId().equals(id)) {
             parkingPlaceRepository.save(tempPP.
                     get().
                     removeFromContract(id));
-            return contractRepository.save(readContract(id));
-
-
-        }
+            return contractRepository.save(readContract(id)); }
         throw new NotFoundException(String.format("Cant remove this parking place from this contract"));
     }
 

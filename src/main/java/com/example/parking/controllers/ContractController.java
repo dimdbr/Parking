@@ -35,13 +35,18 @@ public class ContractController {
     {
         return ResponseEntity.ok(contractService.readContract(id));
     }
-
+    @GetMapping(value = "/contracts/findbyclient/{clientid}")
+    public ResponseEntity<?> readByClientId(@PathVariable String clientid) throws NotFoundException
+    {
+        return ResponseEntity.ok(contractService.readByClientId(clientid));
+    }
     @DeleteMapping(value = "/contracts/{id}")
     public ResponseEntity<?> delete(@PathVariable String id)  throws NotFoundException
     {
         contractService.deleteContract(id);
         return ResponseEntity.noContent().build();
     }
+
 
 
     @PutMapping(value = "contracts/{id}/addcar/{carname}")

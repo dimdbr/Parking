@@ -9,6 +9,7 @@ public interface ContractService {
     Contract createContract(Contract contract) throws NotFoundException;
     List<Contract> readAllContracts();
     Contract readContract(String id) throws NotFoundException;
+    Contract readByClientId(String clientId) throws NotFoundException;
     Contract addParkingPlace(String id, int parkingPlace) throws NotFoundException;
     Contract removeParkingPlace(String id, int parkingPlace) throws NotFoundException;
 

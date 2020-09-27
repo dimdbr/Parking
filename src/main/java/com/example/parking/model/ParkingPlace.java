@@ -65,7 +65,7 @@ public  final class ParkingPlace {
 
     public ParkingPlace removeFromContract(String id)
     {
-        if(this.contractId==id) {
+        if(this.contractId.equals(id.toString())) {
             this.contractId = null;
             this.changeStatus();
             return this;

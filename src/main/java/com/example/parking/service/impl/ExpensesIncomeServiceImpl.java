@@ -23,6 +23,10 @@ public class ExpensesIncomeServiceImpl implements ExpensesIncomeService {
     private MalfunctionRepository malfunctionRepository;
     @Autowired
     private TariffRepository tariffRepository;
+    @Autowired
+    private ContractRepository contractRepository;
+    @Autowired
+    private ParkingPlaceRepository parkingPlaceRepository;
 
 
 
@@ -55,11 +59,14 @@ public class ExpensesIncomeServiceImpl implements ExpensesIncomeService {
 
     @Override
     public void setPayPriceForClients() throws NotFoundException {
+
         List<Client> clients=clientRepository.findAll();
         List<CommunalWorker> communalWorkers=communalWorkerRepository.findAll();
         List<Malfunction> malfunctions = malfunctionRepository.findAll();
         List<Accountant> accountants = accountantRepository.findAll();
         Tariff tariff=tariffRepository.getOne(1);
+
+
         double payPriceTotal=0;
         for(CommunalWorker communalWorker: communalWorkers)
         {
@@ -79,14 +86,29 @@ public class ExpensesIncomeServiceImpl implements ExpensesIncomeService {
             }
         }
         int numberOfClients = clients.size();
-        double payPrice = payPriceTotal/numberOfClients+
-                tariff.getPlacePrice()+
-                tariff.getElectricityTariff()+
-                tariff.getGasTariff()+
-                tariff.getWaterTariff();
+
 
         for(Client client: clients)
         {
+
+            /*double payPrice = payPriceTotal/numberOfClients+
+                (tariff.getPlacePrice()+
+                tariff.getElectricityTariff()+
+                tariff.getGasTariff()+
+                tariff.getWaterTariff())*
+                        parkingPlaceRepository.
+                                getParkingPlaceByContractId(contractRepository.
+                                        findByClientId(client.
+                                                getClientID()).
+                                        getContractId()).
+                                size();
+
+             */
+            double payPrice = payPriceTotal/numberOfClients+
+                    (tariff.getPlacePrice()+
+                            tariff.getElectricityTariff()+
+                            tariff.getGasTariff()+
+                            tariff.getWaterTariff());
             client.setMonthPay(payPrice);
             clientRepository.save(client);
         }

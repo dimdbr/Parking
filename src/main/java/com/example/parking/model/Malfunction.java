@@ -39,7 +39,6 @@ public final class Malfunction {
         this.malfunctionDesc = malfunctionDesc;
         this.isPayed = false;
 
-
     }
 
     public Malfunction() {

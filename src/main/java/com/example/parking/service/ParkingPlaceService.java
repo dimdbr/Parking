@@ -15,6 +15,9 @@ public interface ParkingPlaceService {
     ParkingPlace readParkingPlace(int id) throws NotFoundException;
 
     ParkingPlace updateParkingPlaceStatus(int id) throws NotFoundException;
+    List<ParkingPlace> readParkingPlacesByContractId(String contractId) throws NotFoundException;
+
+
 
     ParkingPlace addParkingPlaceToContract(String contractId, int id) throws NotFoundException;
 
