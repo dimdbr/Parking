@@ -14,7 +14,7 @@ public final class Client {
     @Column(name = "id",updatable = false, nullable = false)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private  String clientID;
+    private  UUID clientID;
     @Column(name = "name")
     private  String name;
     @Column(name = "monthpay")
@@ -22,7 +22,7 @@ public final class Client {
 
 
     public Client(String name) {
-        this.clientID=UUID.randomUUID().toString();
+        this.clientID=UUID.randomUUID();
         this.name = name;
         this.monthPay=0;
     }
@@ -31,7 +31,7 @@ public final class Client {
 
     }
 
-    public String getClientID() {
+    public UUID getClientID() {
         return clientID;
     }
 

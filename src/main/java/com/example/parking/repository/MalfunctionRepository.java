@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MalfunctionRepository  extends JpaRepository<Malfunction, UUID> {
-    @Query(value = "SELECT * from malfunctions where ispayed=true ",nativeQuery = true)
-    List<Malfunction> readUnpayed();
-    @Query(value = "SELECT * from malfunctions where ispayed=false ",nativeQuery = true)
-    List<Malfunction> readPayed();
+    @Query(value = "SELECT * from malfunctions where ispayed=?1 ",nativeQuery = true)
+    List<Malfunction> readMalfunctionByPayed(boolean ispayed);
+
 }

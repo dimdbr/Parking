@@ -39,7 +39,7 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
     }
 
     @Override
-    public CommunalWorker readCommunalWorker(String id) throws NotFoundException {
+    public CommunalWorker readCommunalWorker(UUID id) throws NotFoundException {
         Optional<CommunalWorker> tempComWork = communalWorkerRepository.findById(id);
         if(tempComWork.isPresent())
             return communalWorkerRepository.findById(id).get();
@@ -48,7 +48,7 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
     }
 
     @Override
-    public CommunalWorker updateCommunalWorker(CommunalWorker communalWorker, String id) throws NotFoundException {
+    public CommunalWorker updateCommunalWorker(CommunalWorker communalWorker, UUID id) throws NotFoundException {
         if(communalWorkerRepository.existsById(id))
 
             communalWorker.setCwId(id);
@@ -57,7 +57,7 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
     }
 
     @Override
-    public CommunalWorker addMalfunction(String id, Malfunction malfunction) throws NotFoundException {
+    public CommunalWorker addMalfunction(UUID id, Malfunction malfunction) throws NotFoundException {
 
         malfunction.addToWorker(id);
         malfunctionRepository.save(malfunction);
@@ -65,7 +65,7 @@ public class CommunalWorkerServiceImpl implements CommunalWorkerService {
     }
 
     @Override
-    public void deleteCommunalWorker(String id) throws NotFoundException{
+    public void deleteCommunalWorker(UUID id) throws NotFoundException{
         communalWorkerRepository.delete(readCommunalWorker(id));
     }
 }

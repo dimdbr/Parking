@@ -14,19 +14,19 @@ public final  class CommunalWorker {
     @Column(name = "id",updatable = false, nullable = false)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String cwId;
+    private UUID cwId;
     @Column(name = "name")
     private String name;
     @Column(name = "salary")
     private double salary;
-    @Column(name ="cwtype")
+    @Column(name ="cw_type")
     @Enumerated(EnumType.STRING)
     private CW_Type cwType;
     @Column(name = "iswinter")
     private boolean isWinter;
 
 
-    public CommunalWorker(String cwId, String name, double salary, CW_Type cwType, boolean isWinter, String malfunctionId) {
+    public CommunalWorker(UUID cwId, String name, double salary, CW_Type cwType, boolean isWinter, String malfunctionId) {
         this.cwId = cwId;
         this.name = name;
         this.salary = salary;
@@ -35,8 +35,8 @@ public final  class CommunalWorker {
 
     }
 
-    public CommunalWorker(String name, double salary, CW_Type cwType, boolean isWinter) {
-        this.cwId = UUID.randomUUID().toString();
+    public CommunalWorker(String name, double salary, CW_Type cwType) {
+        this.cwId = UUID.randomUUID();
         this.name = name;
         this.salary = salary;
         this.cwType = cwType;
@@ -48,11 +48,11 @@ public final  class CommunalWorker {
 
     }
 
-    public String getCwId() {
+    public UUID getCwId() {
         return cwId;
     }
 
-    public void setCwId(String cwId) {
+    public void setCwId(UUID cwId) {
         this.cwId = cwId;
     }
 

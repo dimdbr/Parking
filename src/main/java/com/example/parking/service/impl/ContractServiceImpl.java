@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ContractServiceImpl implements ContractService {
@@ -38,7 +39,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public Contract readContract(String id) throws NotFoundException {
+    public Contract readContract(UUID id) throws NotFoundException {
         Optional<Contract> tempContr = contractRepository.findById(id);
         if(tempContr.isPresent())
             return contractRepository.findById(id).get();
@@ -47,12 +48,12 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public Contract readByClientId(String clientId) throws NotFoundException {
+    public Contract readByClientId(UUID clientId) throws NotFoundException {
         return contractRepository.findByClientId(clientId);
     }
 
     @Override
-    public Contract addParkingPlace(String id, int parkingPlace) throws NotFoundException {
+    public Contract addParkingPlace(UUID id, int parkingPlace) throws NotFoundException {
         Optional<ParkingPlace> tempPP = parkingPlaceRepository.
                 findById(parkingPlace);
         if(tempPP.isPresent() && (tempPP.get().isOccupied()==false)) {
@@ -68,7 +69,7 @@ public class ContractServiceImpl implements ContractService {
 
 
     @Override
-    public Contract removeParkingPlace(String id, int parkingPlace) throws NotFoundException {
+    public Contract removeParkingPlace(UUID id, int parkingPlace) throws NotFoundException {
         Optional<ParkingPlace> tempPP = parkingPlaceRepository.
                 findById(parkingPlace);
         if(tempPP.isPresent() && (tempPP.get().isOccupied()==true)&&tempPP.get().getContractId().equals(id)) {
@@ -80,17 +81,17 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public Contract addClientCar(String id, String carName) throws NotFoundException {
+    public Contract addClientCar(UUID id, String carName) throws NotFoundException {
         return contractRepository.save(readContract(id).addClientCar(carName));
     }
 
     @Override
-    public Contract removeClientCar(String id, String carName) throws NotFoundException {
+    public Contract removeClientCar(UUID id, String carName) throws NotFoundException {
         return contractRepository.save(readContract(id).removeClientCar(carName));
     }
 
     @Override
-    public void deleteContract(String id) throws NotFoundException {
+    public void deleteContract(UUID id) throws NotFoundException {
         List<ParkingPlace> parkingPlaces= parkingPlaceRepository.findAll();
         for(ParkingPlace parkingPlace : parkingPlaces)
         {

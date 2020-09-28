@@ -22,42 +22,40 @@ public  final class Contract {
     @Column(name = "id",updatable = false, nullable = false)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String ContractId;
+    private UUID ContractId;
     @Column(name = "clientid")
-    private String ClientId;
-
+    private UUID ClientId;
     @Type(type = "list-array")
     @Column(name = "registeredcars")
     private List<String> registeredCars;
 
-    public Contract(String contractId, String clientId, List<String> registeredCars) {
+    public Contract(UUID contractId, UUID clientId, List<String> registeredCars) {
         ContractId = contractId;
         ClientId = clientId;
-
         this.registeredCars = registeredCars;
     }
     public Contract()
     {}
 
-    public Contract(String clientId, String carName)
-    {   this.ContractId= UUID.randomUUID().toString();
+    public Contract(UUID clientId, String carName)
+    {   this.ContractId= UUID.randomUUID();
         this.ClientId= clientId;
 
         this.registeredCars.add(carName);
     }
-    public Contract(String clientId, List<String> carNames)
+    public Contract(UUID clientId, List<String> carNames)
     {
-        this.ContractId=UUID.randomUUID().toString();
+        this.ContractId=UUID.randomUUID();
         this.ClientId= clientId;
 
         this.registeredCars=carNames;
     }
 
-    public String getContractId() {
+    public UUID getContractId() {
         return ContractId;
     }
 
-    public String getClientId() {
+    public UUID getClientId() {
         return ClientId;
     }
 
@@ -67,7 +65,7 @@ public  final class Contract {
         return registeredCars;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(UUID clientId) {
         ClientId = clientId;
     }
 

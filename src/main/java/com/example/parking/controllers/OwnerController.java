@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/owners")
 public class OwnerController {
 
     private final CoOwnerService coOwnerService;
@@ -18,32 +19,32 @@ public class OwnerController {
         this.tariffService = tariffService;
     }
 
-    @GetMapping(value = "/owners")
+    @GetMapping()
     public ResponseEntity<?> read()
     {
         return ResponseEntity.ok(coOwnerService.readCoOwner());
     }
 
-    @GetMapping(value = "/owners/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> read(@PathVariable(name = "id") int id) throws NotFoundException
     {
         return ResponseEntity.ok(coOwnerService.readCoOwner(id));
     }
 
 
-    @PutMapping(value = "/owners/changetariff/{id}")
+    @PutMapping(value = "/changetariff/{id}")
     public ResponseEntity<?> updateTariff(@PathVariable(name = "id") int tariffid,@RequestBody Tariff tariff) throws NotFoundException
     {
         return ResponseEntity.ok(tariffService.updateTariff(tariffid,tariff));
     }
 
-    @PutMapping(value = "/owners/{id}/collectmoney")
+    @PutMapping(value = "/{id}/collectmoney")
     public ResponseEntity<?> collectMoney(@PathVariable(name = "id") int id) throws NotFoundException
     {
         return ResponseEntity.ok(coOwnerService.collectMoney(id));
     }
 
-    @PutMapping(value = "/owners/paymoney")
+    @PutMapping(value = "/paymoney")
     public ResponseEntity<?> payMoney() throws NotFoundException
     {
         coOwnerService.payMoney();

@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
+@RequestMapping(value = "/workers")
 public class CommunalWorkerController {
     private final CommunalWorkerService communalWorkerService;
     private final MalfunctionService malfunctionService;
@@ -20,37 +22,37 @@ public class CommunalWorkerController {
         this.malfunctionService = malfunctionService;
     }
 
-    @PostMapping(value = "/workers")
+    @PostMapping()
     public ResponseEntity<?> create(@RequestBody CommunalWorker communalWorker) {
         return ResponseEntity.ok(communalWorkerService.createCommunalWorker(communalWorker));
     }
 
 
-    @GetMapping(value = "/workers")
+    @GetMapping()
     public ResponseEntity<List<CommunalWorker>> read() {
         return ResponseEntity.ok(communalWorkerService.readCommunalWorkers());
     }
 
 
-    @GetMapping(value = "/workers/{id}")
-    public ResponseEntity<CommunalWorker> read(@PathVariable(name = "id") String id)throws NotFoundException {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CommunalWorker> read(@PathVariable(name = "id") UUID id)throws NotFoundException {
         return ResponseEntity.ok(communalWorkerService.readCommunalWorker(id));
     }
 
-    @PutMapping(value = "/workers/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") String id, @RequestBody CommunalWorker communalWorker) throws NotFoundException {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") UUID id, @RequestBody CommunalWorker communalWorker) throws NotFoundException {
         return ResponseEntity.ok(communalWorkerService.updateCommunalWorker(communalWorker,id));
     }
 
-    @PutMapping(value = "/workers/{id}/malf")
-    public ResponseEntity<?> addMalfunction(@PathVariable(name = "id") String id,@RequestBody Malfunction malfunction) throws NotFoundException
+    @PutMapping(value = "/{id}/malfunctions")
+    public ResponseEntity<?> addMalfunction(@PathVariable(name = "id") UUID id,@RequestBody Malfunction malfunction) throws NotFoundException
     {
        return ResponseEntity.ok(communalWorkerService.addMalfunction(id,malfunction));
     }
 
 
-    @DeleteMapping(value = "/workers/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") String id) throws NotFoundException {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") UUID id) throws NotFoundException {
         communalWorkerService.deleteCommunalWorker(id);
         return ResponseEntity.noContent().build();
     }

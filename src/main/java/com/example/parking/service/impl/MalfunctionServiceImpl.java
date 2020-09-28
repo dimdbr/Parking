@@ -31,16 +31,10 @@ public class MalfunctionServiceImpl implements MalfunctionService {
 
 
     @Override
-    public List<Malfunction> readPayedMalfunctions()
+    public List<Malfunction> readMalfunctions(boolean ispayed)
     {
-         return malfunctionRepository.readUnpayed();
+         return malfunctionRepository.readMalfunctionByPayed(ispayed);
     }
-
-    @Override
-    public List<Malfunction> readUnPayedMalfunctions() {
-        return malfunctionRepository.readPayed();
-    }
-
 
     @Override
     public Malfunction readMalfunction(UUID id) throws NotFoundException {
@@ -52,7 +46,7 @@ public class MalfunctionServiceImpl implements MalfunctionService {
     }
 
     @Override
-    public Malfunction addMalfunctionToWorker(String workerId, Malfunction malfunction) throws NotFoundException {
+    public Malfunction addMalfunctionToWorker(UUID workerId, Malfunction malfunction) throws NotFoundException {
         return malfunctionRepository.save(malfunction.addToWorker(workerId));
     }
 

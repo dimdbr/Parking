@@ -43,17 +43,17 @@ public class ParkingPlaceServiceImpl implements ParkingPlaceService {
     }
 
     @Override
-    public List<ParkingPlace> readParkingPlacesByContractId(String contractId) throws NotFoundException {
+    public List<ParkingPlace> readParkingPlacesByContractId(UUID contractId) throws NotFoundException {
         return parkingPlaceRepository.getParkingPlaceByContractId(contractId);
     }
 
     @Override
-    public ParkingPlace addParkingPlaceToContract(String contractId,int id) throws NotFoundException{
+    public ParkingPlace addParkingPlaceToContract(UUID contractId,int id) throws NotFoundException{
         return parkingPlaceRepository.save(readParkingPlace(id).addToContract(contractId));
     }
 
     @Override
-    public ParkingPlace removeParkingPlaceFromContract(String contractId, int id) throws NotFoundException {
+    public ParkingPlace removeParkingPlaceFromContract(UUID contractId, int id) throws NotFoundException {
         return parkingPlaceRepository.save(readParkingPlace(id).removeFromContract(contractId));
     }
 

@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
+@RequestMapping(value = "/contracts")
 public class ContractController {
     @Autowired
     private final ContractService contractService;
@@ -17,31 +20,31 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-    @PostMapping(value ="/contracts")
+    @PostMapping()
     public ResponseEntity<?> create (@RequestBody Contract contract) throws NotFoundException
     {
 
         return ResponseEntity.ok(contractService.createContract(contract));
     }
 
-    @GetMapping(value = "/contracts")
+    @GetMapping()
     public ResponseEntity<?> read()
     {
         return ResponseEntity.ok(contractService.readAllContracts());
     }
 
-    @GetMapping(value = "/contracts/{id}")
-    public ResponseEntity<?> read(@PathVariable String id) throws NotFoundException
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> read(@PathVariable UUID id) throws NotFoundException
     {
         return ResponseEntity.ok(contractService.readContract(id));
     }
-    @GetMapping(value = "/contracts/findbyclient/{clientid}")
-    public ResponseEntity<?> readByClientId(@PathVariable String clientid) throws NotFoundException
+    @GetMapping(value = "/findbyclient/{clientid}")
+    public ResponseEntity<?> readByClientId(@PathVariable UUID clientid) throws NotFoundException
     {
         return ResponseEntity.ok(contractService.readByClientId(clientid));
     }
-    @DeleteMapping(value = "/contracts/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id)  throws NotFoundException
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id)  throws NotFoundException
     {
         contractService.deleteContract(id);
         return ResponseEntity.noContent().build();
@@ -49,25 +52,25 @@ public class ContractController {
 
 
 
-    @PutMapping(value = "contracts/{id}/addcar/{carname}")
-    public ResponseEntity<?> addCar(@PathVariable String id,@PathVariable String carname) throws NotFoundException
+    @PutMapping(value = "/{id}/addcar/{carname}")
+    public ResponseEntity<?> addCar(@PathVariable UUID id,@PathVariable String carname) throws NotFoundException
     {
         return ResponseEntity.ok(contractService.addClientCar(id,carname));
     }
 
-    @PutMapping(value = "contracts/{id}/delcar/{carname}")
-    public ResponseEntity<?> removeCar(@PathVariable String id,@PathVariable String carname) throws NotFoundException
+    @PutMapping(value = "/{id}/delcar/{carname}")
+    public ResponseEntity<?> removeCar(@PathVariable UUID id,@PathVariable String carname) throws NotFoundException
     {
         return ResponseEntity.ok(contractService.removeClientCar(id,carname));
     }
 
-    @PutMapping(value = "contracts/{id}/addparkplace/{parkingplaceid}")
-    public ResponseEntity<?> addParkPlace(@PathVariable String id, @PathVariable int parkingplaceid)  throws NotFoundException
+    @PutMapping(value = "/{id}/addparkplace/{parkingplaceid}")
+    public ResponseEntity<?> addParkPlace(@PathVariable UUID id, @PathVariable int parkingplaceid)  throws NotFoundException
     {
         return ResponseEntity.ok(contractService.addParkingPlace(id,parkingplaceid));
     }
-    @PutMapping(value = "contracts/{id}/removeparkplace/{parkingplaceid}")
-    public ResponseEntity<?> removeParkPlace(@PathVariable String id, @PathVariable int parkingplaceid)  throws NotFoundException
+    @PutMapping(value = "/{id}/removeparkplace/{parkingplaceid}")
+    public ResponseEntity<?> removeParkPlace(@PathVariable UUID id, @PathVariable int parkingplaceid)  throws NotFoundException
     {
         return ResponseEntity.ok(contractService.removeParkingPlace(id,parkingplaceid));
     }

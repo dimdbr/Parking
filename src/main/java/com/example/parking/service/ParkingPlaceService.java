@@ -4,6 +4,7 @@ import com.example.parking.model.ParkingPlace;
 import javassist.NotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ParkingPlaceService {
 
@@ -15,13 +16,13 @@ public interface ParkingPlaceService {
     ParkingPlace readParkingPlace(int id) throws NotFoundException;
 
     ParkingPlace updateParkingPlaceStatus(int id) throws NotFoundException;
-    List<ParkingPlace> readParkingPlacesByContractId(String contractId) throws NotFoundException;
+    List<ParkingPlace> readParkingPlacesByContractId(UUID contractId) throws NotFoundException;
 
 
 
-    ParkingPlace addParkingPlaceToContract(String contractId, int id) throws NotFoundException;
+    ParkingPlace addParkingPlaceToContract(UUID contractId, int id) throws NotFoundException;
 
-    ParkingPlace removeParkingPlaceFromContract(String contractId, int id) throws NotFoundException;
+    ParkingPlace removeParkingPlaceFromContract(UUID contractId, int id) throws NotFoundException;
 
 
 }

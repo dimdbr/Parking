@@ -5,6 +5,7 @@ import com.example.parking.model.Malfunction;
 import javassist.NotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CommunalWorkerService {
 
@@ -12,11 +13,11 @@ public interface CommunalWorkerService {
 
     List<CommunalWorker> readCommunalWorkers();
 
-    CommunalWorker readCommunalWorker(String id) throws NotFoundException;
+    CommunalWorker readCommunalWorker(UUID id) throws NotFoundException;
 
-    CommunalWorker updateCommunalWorker(CommunalWorker communalWorker, String id) throws NotFoundException;
+    CommunalWorker updateCommunalWorker(CommunalWorker communalWorker, UUID id) throws NotFoundException;
 
-    CommunalWorker addMalfunction(String id, Malfunction malfunction) throws NotFoundException;
-    void deleteCommunalWorker(String id) throws NotFoundException;
+    CommunalWorker addMalfunction(UUID id, Malfunction malfunction) throws NotFoundException;
+    void deleteCommunalWorker(UUID id) throws NotFoundException;
 
 }

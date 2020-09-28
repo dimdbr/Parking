@@ -15,11 +15,11 @@ public interface ClientService {
 
     List<Client> readAllClients();
 
-     Client readClient(String Id) throws NotFoundException;
+     Client readClient(UUID Id) throws NotFoundException;
 
-     Client updateClientPayPrice(String id,double price) throws NotFoundException;
+     Client updateClientPayPrice(UUID id,double price) throws NotFoundException;
 
-     void deleteClient(String id) throws NotFoundException;
+     void deleteClient(UUID id) throws NotFoundException;
 
 
 

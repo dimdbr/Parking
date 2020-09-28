@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client readClient(String id) throws NotFoundException {
+    public Client readClient(UUID id) throws NotFoundException {
         Optional<Client> tempClient = clientRepository.findById(id);
         if(tempClient.isPresent())
             return clientRepository.findById(id).get();
@@ -39,12 +39,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public  Client updateClientPayPrice(String id, double payPrice) throws NotFoundException{
+    public  Client updateClientPayPrice(UUID id, double payPrice) throws NotFoundException{
 
         return clientRepository.save(readClient(id).setMonthPay(payPrice));
     }
     @Override
-    public void deleteClient(String id) throws NotFoundException {
+    public void deleteClient(UUID id) throws NotFoundException {
         clientRepository.delete(readClient(id));
     }
 

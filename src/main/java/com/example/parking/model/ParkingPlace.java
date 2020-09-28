@@ -3,6 +3,7 @@ package com.example.parking.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "parkingplaces")
@@ -15,7 +16,7 @@ public  final class ParkingPlace {
     @Column(name = "isoccupied")
     private boolean isOccupied =false;
     @Column (name = "contractid")
-    private String contractId;
+    private UUID contractId;
     public ParkingPlace(@JsonProperty("id") int parkingPlaceId,
                         @JsonProperty("isOccupied") boolean isOccupied) {
         this.parkingPlaceId = parkingPlaceId;
@@ -43,11 +44,11 @@ public  final class ParkingPlace {
         this.parkingPlaceId = parkingPlaceId;
     }
 
-    public String getContractId() {
+    public UUID getContractId() {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
+    public void setContractId(UUID contractId) {
         this.contractId = contractId;
     }
 
@@ -56,14 +57,14 @@ public  final class ParkingPlace {
         this.isOccupied = !this.isOccupied();
         return this;
     }
-    public ParkingPlace addToContract(String contractId)
+    public ParkingPlace addToContract(UUID contractId)
     {
         this.contractId=contractId;
         this.changeStatus();
         return this;
     }
 
-    public ParkingPlace removeFromContract(String id)
+    public ParkingPlace removeFromContract(UUID id)
     {
         if(this.contractId.equals(id.toString())) {
             this.contractId = null;

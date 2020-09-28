@@ -22,11 +22,11 @@ public final class Malfunction {
     @Column(name = "ispayed")
     private boolean isPayed;
     @Column(name = "workerid")
-    private String workerId;
+    private UUID workerId;
 
 
 
-    public Malfunction(UUID malfunctionId, double fixPrice, String malfunctionDesc, boolean isPayed, String workerId) {
+    public Malfunction(UUID malfunctionId, double fixPrice, String malfunctionDesc, boolean isPayed, UUID workerId) {
         this.malfunctionId = malfunctionId;
         this.fixPrice = fixPrice;
         this.malfunctionDesc = malfunctionDesc;
@@ -77,15 +77,15 @@ public final class Malfunction {
         isPayed = payed;
     }
 
-    public String getWorkerId() {
+    public UUID getWorkerId() {
         return workerId;
     }
 
-    public void setWorkerId(String workerId) {
+    public void setWorkerId(UUID workerId) {
         this.workerId = workerId;
     }
 
-    public Malfunction addToWorker(String workerId)
+    public Malfunction addToWorker(UUID workerId)
     {
         this.workerId=workerId;
         return this;
