@@ -25,6 +25,12 @@ public class CoOwnerServiceImpl implements CoOwnerService {
     private CommunalWorkerRepository communalWorkerRepository;
     @Autowired
     AccountantRepository accountantRepository;
+
+    @Override
+    public CoOwner createOwner(CoOwner coOwner) {
+        return coOwnersRepository.save(coOwner);
+    }
+
     @Override
     public List<CoOwner> readCoOwner() {
         return coOwnersRepository.findAll();

@@ -4,6 +4,7 @@ import com.example.parking.model.Tariff;
 import com.example.parking.service.TariffService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,11 @@ public class TariffController {
         this.tariffService = tariffService;
     }
 
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody Tariff tariff)
+    {
+        return ResponseEntity.ok(tariffService.createTariff(tariff));
+    }
     @GetMapping()
     public ResponseEntity<?> read(){
         return ResponseEntity.ok(tariffService.readAllTariff());

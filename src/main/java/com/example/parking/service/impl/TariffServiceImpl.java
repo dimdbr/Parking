@@ -18,6 +18,11 @@ public class TariffServiceImpl implements TariffService {
     private TariffRepository tariffRepository;
 
     @Override
+    public Tariff createTariff(Tariff tariff) {
+        return tariffRepository.save(tariff);
+    }
+
+    @Override
     public List<Tariff> readAllTariff() {
         return tariffRepository.findAll();
     }

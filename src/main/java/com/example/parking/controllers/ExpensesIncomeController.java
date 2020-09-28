@@ -1,5 +1,6 @@
 package com.example.parking.controllers;
 
+import com.example.parking.model.Accountant;
 import com.example.parking.service.ExpensesIncomeService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ public class ExpensesIncomeController {
 
     public ExpensesIncomeController(ExpensesIncomeService expensesIncomeService) {
         this.expensesIncomeService = expensesIncomeService;
+    }
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody Accountant accountant)
+    {
+        return ResponseEntity.ok(expensesIncomeService.createAccountant(accountant));
     }
     @GetMapping()
     public ResponseEntity<?> read()

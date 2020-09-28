@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface TariffService {
 
+    Tariff createTariff(Tariff tariff);
     List<Tariff> readAllTariff();
 
     Tariff readTariff(int id) throws NotFoundException;

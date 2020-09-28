@@ -23,13 +23,11 @@ public class ExpensesIncomeServiceImpl implements ExpensesIncomeService {
     private MalfunctionRepository malfunctionRepository;
     @Autowired
     private TariffRepository tariffRepository;
-    @Autowired
-    private ContractRepository contractRepository;
-    @Autowired
-    private ParkingPlaceRepository parkingPlaceRepository;
 
-
-
+    @Override
+    public Accountant createAccountant(Accountant accountant) {
+        return accountantRepository.save(accountant);
+    }
 
     @Override
     public List<Accountant> readAllAccountants() {

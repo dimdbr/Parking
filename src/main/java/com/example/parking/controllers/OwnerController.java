@@ -1,5 +1,6 @@
 package com.example.parking.controllers;
 
+import com.example.parking.model.CoOwner;
 import com.example.parking.model.Tariff;
 import com.example.parking.service.CoOwnerService;
 import com.example.parking.service.TariffService;
@@ -17,6 +18,12 @@ public class OwnerController {
     public OwnerController(CoOwnerService coOwnerService, TariffService tariffService) {
         this.coOwnerService = coOwnerService;
         this.tariffService = tariffService;
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody CoOwner coOwner)
+    {
+        return ResponseEntity.ok(coOwnerService.createOwner(coOwner));
     }
 
     @GetMapping()

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ExpensesIncomeService {
 
-
+    Accountant createAccountant(Accountant accountant);
     List<Accountant> readAllAccountants();
     Accountant readAccountant(int id) throws NotFoundException;
     Accountant updateSalary(int id,double salary) throws NotFoundException;
